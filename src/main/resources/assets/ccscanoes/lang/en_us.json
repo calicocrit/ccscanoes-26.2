@@ -1,0 +1,13 @@
+{
+  "itemGroup.ccscanoes": "Example Mod Tab",
+  "block.ccscanoes.example_block": "Example Block",
+  "item.ccscanoes.example_item": "Example Item",
+
+  "ccscanoes.configuration.title": "CCsCanoes Configs",
+  "ccscanoes.configuration.section.ccscanoes.common.toml": "CCsCanoes Configs",
+  "ccscanoes.configuration.section.ccscanoes.common.toml.title": "CCsCanoes Configs",
+  "ccscanoes.configuration.items": "Item List",
+  "ccscanoes.configuration.logDirtBlock": "Log Dirt Block",
+  "ccscanoes.configuration.magicNumberIntroduction": "Magic Number Text",
+  "ccscanoes.configuration.magicNumber": "Magic Number"
+}
