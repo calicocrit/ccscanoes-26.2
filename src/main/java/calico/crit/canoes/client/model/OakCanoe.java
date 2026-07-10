@@ -1,17 +1,22 @@
-// Made with Blockbench 5.1.4
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
+package calico.crit.canoes.client.model;
 
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.resources.Identifier;
 
-public class OakCanoe<T extends Entity> extends EntityModel<T> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "oakcanoe"), "main");
-	private final ModelPart bone2;
-	private final ModelPart bone;
+public class OakCanoe extends EntityModel<EntityRenderState> {
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath("ccscanoes", "oakcanoe"), "main");
 
 	public OakCanoe(ModelPart root) {
-		this.bone2 = root.getChild("bone2");
-		this.bone = root.getChild("bone");
+		super(root);
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -41,13 +46,6 @@ public class OakCanoe<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		bone2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void setupAnim(EntityRenderState state) {
 	}
 }
