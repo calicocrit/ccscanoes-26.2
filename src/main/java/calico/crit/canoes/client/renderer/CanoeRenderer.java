@@ -42,6 +42,40 @@ public class CanoeRenderer extends EntityRenderer<CanoeEntity, CanoeRenderState>
         state.bubbleAngle = entity.getBubbleAngle(partialTick);
         state.rowingTimeLeft = entity.getRowingTime(0, partialTick);
         state.rowingTimeRight = entity.getRowingTime(1, partialTick);
+
+        boolean isRowingLeft = state.rowingTimeLeft > 0.0F;
+        boolean isRowingRight = state.rowingTimeRight > 0.0F;
+
+        if (isRowingLeft || isRowingRight) {
+            float rowingTime = Math.max(state.rowingTimeLeft, state.rowingTimeRight);
+            float time = rowingTime * 1.5F;
+
+            // Pitch (Forward / Backward stroke along the length of the canoe):
+            // Smooth dipping and pulling backward stroke (0.0 to 1.0)
+            float strokeProgress = (Mth.sin(time) + 1.0F) / 2.0F;
+            float basePitchOffset = Mth.clampedLerp((float) (-Math.PI / 12), (float) (Math.PI / 12), strokeProgress);
+
+            state.paddleXRot = basePitchOffset;
+
+            // Yaw: Slight rotation offsets depending on steering
+            if (isRowingLeft && isRowingRight) {
+                // Moving forward: Keep paddle aligned close to the side
+                state.paddleYRot = (float) (-Math.PI / 12);
+                state.paddleZRot = Mth.sin(time) * 0.05F;
+            } else if (isRowingLeft) {
+                // Steering left
+                state.paddleYRot = (float) (-Math.PI / 6);
+                state.paddleZRot = -0.1F + Mth.sin(time) * 0.05F;
+            } else {
+                // Steering right
+                state.paddleYRot = (float) (Math.PI / 6);
+                state.paddleZRot = 0.1F + Mth.sin(time) * 0.05F;
+            }
+        } else {
+            state.paddleXRot = 0.0F;
+            state.paddleYRot = 0.0F;
+            state.paddleZRot = 0.0F;
+        }
     }
 
     @Override

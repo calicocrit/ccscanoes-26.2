@@ -11,4 +11,7 @@ public class CanoeRenderState extends EntityRenderState {
     public boolean isUnderWater;
     public float rowingTimeLeft;
     public float rowingTimeRight;
+    public float paddleXRot;
+    public float paddleYRot;
+    public float paddleZRot;
 }
